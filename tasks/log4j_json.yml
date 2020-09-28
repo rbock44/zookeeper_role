@@ -1,0 +1,11 @@
+- name: "add jsonevent layout for log4j 1.2"
+  copy:
+    dest: "/opt/zookeeper/lib/{{ item }}"
+    src: "{{ item }}"
+    owner: "{{ zookeeper_user }}"
+    group: "{{ zookeeper_group }}"
+  loop:
+    - commons-lang-2.6.jar
+    - json-smart-1.1.1.jar
+    - jsonevent-layout-1.7.jar
+

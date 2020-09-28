@@ -2,6 +2,10 @@
 ## General
 zookeeper_version: 3.5.6
 
+
+zookeeper_log4j_json: no
+zookeeper_log4j_properties_template: log4j.properties.j2
+
 ## Service options
 
 # Owner

@@ -30,7 +30,7 @@
 
 - name: ZOOKEEPER | Update the log4j
   template:
-    src: log4j.properties.j2
+    src: "{{ zookeeper_log4j_properties_template }}"
     dest: "{{ zookeeper_conf_dir }}/log4j.properties"
     owner: "{{ zookeeper_user }}"
     group: "{{ zookeeper_group }}"
