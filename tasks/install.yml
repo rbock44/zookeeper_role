@@ -38,7 +38,7 @@
 - name: ZOOKEEPER | Check ZooKeeper version
   shell: |
     set -o pipefail && \
-    echo status | nc {{ zookeeper_client_port_address }} 2181
+    echo status | nc -q 10 {{ zookeeper_client_port_address }} 2181
   register: zookeeper_check
   args:
     executable: /bin/bash
@@ -54,6 +54,11 @@
     dest: "{{ zookeeper_install_path }}"
     owner: "{{ zookeeper_user }}"
     group: "{{ zookeeper_group }}"
+  when: "zookeeper_force_reinstall or zookeeper_check is failed or zookeeper_version not in zookeeper_check.stdout"
+
+- name: ZOOKEEPER | Untar Reason
+  debug:
+    msg: "{{ zookeeper_check }}"
   when: "zookeeper_force_reinstall or zookeeper_check is failed or zookeeper_version not in zookeeper_check.stdout"
 
 - name: ZOOKEEPER | Create systemd service
